@@ -1,21 +1,21 @@
-# Node - NEVER commit this
+
 node_modules/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 frontend/public/
 
-# Data files - too large
+
 data/
 2025/
 
-# Python environment
+
 venv/
 __pycache__/
 *.pyc
 *.pyo
 
-# Raw JSON match files
+
 335*.json
 336*.json
 981*.json
