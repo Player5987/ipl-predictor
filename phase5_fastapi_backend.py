@@ -1,14 +1,4 @@
-"""
-============================================================
-IPL PREDICTOR — PHASE 5: FASTAPI BACKEND
-============================================================
-Fix: Added encoding="utf-8" to file write (Windows fix)
 
-HOW TO RUN:
-  python phase5_fastapi_backend.py
-  Then: uvicorn backend.main:app --reload --port 8000
-============================================================
-"""
 
 import os
 
