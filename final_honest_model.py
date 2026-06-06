@@ -1,24 +1,4 @@
-"""
-============================================================
-IPL PREDICTOR — FINAL HONEST MODEL
-============================================================
-CV AUC = 0.55 is REAL signal. Test AUC = 0.46 is because:
-  - Train: 2008-2021 (older, more predictable IPL era)
-  - Test:  2022-2024 (modern high-parity IPL era)
-  - The gap is ERA MISMATCH, not overfitting
 
-CORRECT EVALUATION: Use TimeSeriesSplit CV = 0.55
-That is your honest model performance.
-
-This script:
-1. Trains the best model (RandomForest) on ALL data
-2. Saves with correct feature names for API
-3. Generates README-ready results table
-4. Validates calibration
-
-Run: python final_honest_model.py
-============================================================
-"""
 
 import pandas as pd
 import numpy as np
@@ -52,9 +32,9 @@ df = pd.read_csv(os.path.join(PROC,"features.csv"),
                  parse_dates=["date"])
 df = df.sort_values("date").reset_index(drop=True)
 
-# Use the 12 selected high-signal features
+
 FEATURE_COLS = [
-    # Phase features (strongest — new additions)
+    
     "pp_dot_diff",          # powerplay dot ball % diff
     "death_wicket_diff",    # death wicket rate diff
     "pp_wicket_rate_diff",  # powerplay wicket rate diff
@@ -82,9 +62,7 @@ print(f"  {FEATURE_COLS}")
 tscv = TimeSeriesSplit(n_splits=8)
 
 
-# ============================================================
-# STEP 1 — FINAL CV COMPARISON
-# ============================================================
+
 print("\n[STEP 1] Final model comparison (8-fold TS-CV) ...")
 
 candidates = {
@@ -125,10 +103,6 @@ best_auc  = cv_scores[best_name]["mean"]
 print(f"\n  Best model: {best_name}  CV AUC={best_auc:.4f}")
 
 
-# ============================================================
-# STEP 2 — ERA ANALYSIS (why test AUC differs from CV)
-# ============================================================
-print("\n[STEP 2] Era analysis ...")
 print("  Showing why train/test split gives misleading results")
 print()
 
@@ -167,23 +141,20 @@ print("  CV AUC (0.55) is the honest evaluation — it tests")
 print("  each fold against the next chronological period.")
 
 
-# ============================================================
-# STEP 3 — TRAIN FINAL MODEL ON FULL DATA
-# ============================================================
 print("\n[STEP 3] Training final model on all 1076 matches ...")
 
-# RandomForest with calibration — best CV AUC
+
 rf_base = RandomForestClassifier(
     n_estimators=400, max_depth=3,
     min_samples_leaf=15, max_features="sqrt",
     random_state=42, n_jobs=-1)
 
-# Calibrate so probabilities are accurate
+
 final_model = CalibratedClassifierCV(
     rf_base, cv=5, method="isotonic")
 final_model.fit(X, y)
 
-# XGB for feature importances display
+
 xgb_imp = XGBClassifier(
     n_estimators=200, max_depth=2,
     learning_rate=0.05, subsample=0.7,
@@ -201,9 +172,6 @@ print(f"  Model is {'well' if brier < 0.23 else 'poorly'} "
       f"calibrated")
 
 
-# ============================================================
-# STEP 4 — SAVE EVERYTHING
-# ============================================================
 print("\n[STEP 4] Saving ...")
 
 joblib.dump(final_model,
@@ -251,9 +219,7 @@ print("  feature_names.pkl + .json")
 print("  results.json        ← README table data")
 
 
-# ============================================================
-# FINAL REPORT
-# ============================================================
+
 print()
 print("=" * 62)
 print("  PROJECT RESULTS — HONEST SUMMARY")
