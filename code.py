@@ -6,8 +6,7 @@ def parse_cricsheet_match(filepath):
         data = json.load(f)
     
     info = data['info']
-    
-    # Only process IPL matches
+   
     if info.get('competition','').upper() not in ['IPL','INDIAN PREMIER LEAGUE']:
         competition = info.get('event', {}).get('name', '')
         if 'Premier League' not in competition and 'IPL' not in competition:
@@ -50,8 +49,8 @@ def parse_cricsheet_match(filepath):
                 })
     return rows
 
-# Process ALL json files
-json_folder = Path('.')   # adjust to your Cricsheet folder path
+
+json_folder = Path('.')   
 all_rows = []
 
 json_files = list(json_folder.glob('*.json'))
@@ -75,15 +74,14 @@ print(f"Done. Total deliveries: {len(df)}")
 
 df = pd.read_csv('data/processed/cricsheet_deliveries.csv', low_memory=False)
 
-# This forces the 'season' column to take just the first 4 characters (the year) and turns it into a strict number
+
 df['season'] = df['season'].astype(str).str[:4].astype(int)
 # ── Batting career stats ──
 batting = df.groupby(['batter', 'season']).agg(
     runs        = ('runs_scored', 'sum'),
     balls_faced = ('runs_scored', 'count'),
     dismissals  = ('is_wicket', 'sum'),
-    
-    # Phase-specific (great extra features)
+ 
     pp_runs  = ('runs_scored', lambda x: 
                 x[df.loc[x.index,'phase']=='powerplay'].sum()),
     death_runs = ('runs_scored', lambda x:
