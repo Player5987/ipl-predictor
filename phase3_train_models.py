@@ -1,15 +1,4 @@
-"""
-============================================================
-IPL MATCH WINNER PREDICTOR
-Phase 3: Train Base Models + Stacking Ensemble + Optuna
-============================================================
-HOW TO RUN:
-  1. Make sure phase2_feature_engineering.py ran successfully
-     and data/processed/features.csv exists
-  2. Run: python phase3_train_models.py
-  3. Output: models/ folder with all saved models
-============================================================
-"""
+
 
 import pandas as pd
 import numpy as np
@@ -28,9 +17,7 @@ from lightgbm import LGBMClassifier
 import optuna
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 
-# ============================================================
-# STEP 0 — LOAD DATA
-# ============================================================
+
 print("=" * 60)
 print("  IPL PREDICTOR — PHASE 3: MODEL TRAINING")
 print("=" * 60)
@@ -52,15 +39,15 @@ df = pd.read_csv(feat_path, parse_dates=["date"])
 df = df.sort_values("date").reset_index(drop=True)
 print(f"[LOAD] features.csv loaded: {df.shape}")
 
-# Load feature columns saved by Phase 2
+
 fc_path = os.path.join(PROC, "feature_cols.json")
 if os.path.exists(fc_path):
     with open(fc_path) as f:
         FEATURE_COLS = json.load(f)
-    # Keep only columns that exist in df
+   
     FEATURE_COLS = [c for c in FEATURE_COLS if c in df.columns]
 else:
-    # Fallback: detect feature columns automatically
+   
     exclude = {"date","season_num","team1","team2",
                "winner","target","year"}
     FEATURE_COLS = [c for c in df.columns
@@ -74,25 +61,7 @@ X = df[FEATURE_COLS]
 y = df["target"]
 
 
-# ============================================================
-# STEP 1 — TIME-BASED TRAIN / TEST SPLIT
-# ============================================================
-"""
-CONCEPT: WHY NOT RANDOM SPLIT?
-  If we use sklearn's train_test_split(random_state=42),
-  a match from 2024 can end up in training while a match
-  from 2019 is in test. The model then "knows the future"
-  during training — this is called DATA LEAKAGE.
 
-  Example of leakage:
-    Training includes match 900 (played May 2024)
-    The model learns ELO/form from that match
-    Test includes match 800 (played April 2023)
-    The model effectively saw future data
-
-  CORRECT APPROACH: everything before SPLIT_DATE trains,
-  everything after tests. Mirrors real deployment.
-"""
 print("[STEP 1] Time-based train/test split ...")
 
 # Use last 2 full seasons as test set
@@ -115,39 +84,16 @@ print(f"         Test : {len(X_test)} matches  "
 print(f"         Train target balance: {y_train.mean():.1%} team1 wins")
 print(f"         Test  target balance: {y_test.mean():.1%} team1 wins")
 
-# Save the feature names for the FastAPI backend
+
 joblib.dump(FEATURE_COLS, os.path.join(MDIR, "feature_names.pkl"))
 print(f"         Saved feature_names.pkl → models/")
 print()
 
-# TimeSeriesSplit for cross-validation during tuning
-# (same time-order rule applies inside tuning, not just outside)
+
 tscv = TimeSeriesSplit(n_splits=5)
 
-# ============================================================
-# STEP 2 — OPTUNA HYPERPARAMETER TUNING (CORRECTED)
-# ============================================================
-"""
-CONCEPT: WHAT IS OPTUNA?
-  Hyperparameters are settings you choose BEFORE training
-  (max_depth, learning_rate, n_estimators).
-  Wrong choices → underfitting or overfitting.
 
-  Optuna uses Bayesian Optimization:
-  - Trial 1: random guess → score 0.68
-  - Trial 2: learns from trial 1 → smarter guess → 0.71
-  - Trial N: has a map of which regions work well → 0.74+
 
-  It's NOT random search. It builds a surrogate model
-  of the loss function and samples promising regions.
-  50 Bayesian trials > 500 random trials.
-
-  We optimise ROC-AUC (not accuracy) because:
-  AUC measures how well-CALIBRATED the probabilities are,
-  not just whether the predicted winner is correct.
-  A model that says "60% CSK" is more useful than one
-  that just says "CSK wins".
-"""
 print("[STEP 2] Optuna hyperparameter tuning ...")
 print("         (this takes 3-6 minutes — go grab a chai)")
 print()
@@ -181,7 +127,7 @@ def xgb_objective(trial):
 study_xgb = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
 study_xgb.optimize(xgb_objective, n_trials=50)
 
-# FIX: Map shortened trial names to real XGBoost argument parameters
+
 best_xgb_params = {
     "n_estimators":     int(study_xgb.best_params["n_est"]),
     "max_depth":        int(study_xgb.best_params["depth"]),
@@ -226,7 +172,7 @@ def lgbm_objective(trial):
 study_lgbm = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
 study_lgbm.optimize(lgbm_objective, n_trials=50)
 
-# FIX: Map shortened trial names to real LightGBM argument parameters
+
 best_lgbm_params = {
     "n_estimators":      int(study_lgbm.best_params["n_est"]),
     "num_leaves":        int(study_lgbm.best_params["leaves"]),
@@ -242,7 +188,7 @@ best_lgbm_params = {
 print(f"    LightGBM best CV AUC: {study_lgbm.best_value:.4f}")
 print(f"    leaves={best_lgbm_params['num_leaves']}, lr={best_lgbm_params['learning_rate']:.4f}")
 
-# ── 2c. Random Forest tuning ──
+
 print("\n  Tuning Random Forest (40 trials) ...")
 
 def rf_objective(trial):
@@ -280,7 +226,7 @@ best_rf_params = {
 }
 print(f"    RandomForest best CV AUC: {study_rf.best_value:.4f}")
 
-# Save all structured parameters down cleanly to a dictionary artifact
+
 all_params = {
     "xgb":  best_xgb_params,
     "lgbm": best_lgbm_params,
@@ -328,23 +274,7 @@ for name, model in [("XGBoost",      xgb_model),
 print()
 
 
-# ============================================================
-# STEP 4 — STACKING ENSEMBLE (CORRECTED)
-# ============================================================
-"""
-CONCEPT: HOW STACKING WORKS
-  
-  Step A: Train 3 base models using KFold CV.
-          For each fold, the models make predictions on the
-          validation fold they NEVER saw during training.
-          These are called "out-of-fold" (OOF) predictions.
-  
-  Step B: Stack the OOF predictions as features:
-          [xgb_pred, lgbm_pred, rf_pred] per match
-  
-  Step C: Train a meta-learner (Logistic Regression) on
-          these stacked predictions to learn how to weight them.
-"""
+
 print("[STEP 4] Building stacking ensemble ...")
 print("         (trains 5 CV folds × 3 models = 15 fits)")
 print()
