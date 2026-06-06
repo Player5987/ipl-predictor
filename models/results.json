@@ -1,0 +1,94 @@
+{
+  "model": "CalibratedRandomForest",
+  "cv_auc_mean": 0.558,
+  "cv_auc_std": 0.0535,
+  "cv_folds": [
+    0.529,
+    0.624,
+    0.621,
+    0.621,
+    0.558,
+    0.527,
+    0.483,
+    0.5
+  ],
+  "n_matches": 1076,
+  "n_features": 12,
+  "features_used": [
+    "pp_dot_diff",
+    "death_wicket_diff",
+    "pp_wicket_rate_diff",
+    "death_econ_diff",
+    "pp_econ_diff",
+    "death_dot_diff",
+    "pp_run_rate_diff",
+    "pp_boundary_diff",
+    "alltime_diff",
+    "elo_diff",
+    "form10_diff",
+    "margin_diff"
+  ],
+  "feature_importances": {
+    "pp_dot_diff": 0.146,
+    "margin_diff": 0.1044,
+    "death_econ_diff": 0.1,
+    "alltime_diff": 0.0996,
+    "death_dot_diff": 0.0987,
+    "pp_boundary_diff": 0.0974,
+    "pp_run_rate_diff": 0.0918,
+    "elo_diff": 0.0916,
+    "form10_diff": 0.087,
+    "pp_econ_diff": 0.0834,
+    "pp_wicket_rate_diff": 0.0,
+    "death_wicket_diff": 0.0
+  },
+  "brier_score": 0.2304,
+  "all_model_cv": {
+    "RandomForest": {
+      "mean": 0.558,
+      "std": 0.0535,
+      "folds": [
+        0.529,
+        0.624,
+        0.621,
+        0.621,
+        0.558,
+        0.527,
+        0.483,
+        0.5
+      ]
+    },
+    "LogReg_scaled": {
+      "mean": 0.54,
+      "std": 0.0623,
+      "folds": [
+        0.514,
+        0.576,
+        0.588,
+        0.656,
+        0.554,
+        0.499,
+        0.449,
+        0.485
+      ]
+    },
+    "XGB_shallow": {
+      "mean": 0.5392,
+      "std": 0.0654,
+      "folds": [
+        0.5,
+        0.61,
+        0.588,
+        0.647,
+        0.549,
+        0.489,
+        0.458,
+        0.473
+      ]
+    }
+  },
+  "Stacking": {
+    "accuracy": 0.508,
+    "roc_auc": 0.558
+  }
+}

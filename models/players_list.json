@@ -1,0 +1,895 @@
+[
+  {
+    "name": "V Kohli",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 8014,
+    "career_wickets": 0
+  },
+  {
+    "name": "S Dhawan",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 6769,
+    "career_wickets": 0
+  },
+  {
+    "name": "RG Sharma",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 6630,
+    "career_wickets": 0
+  },
+  {
+    "name": "DA Warner",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 6567,
+    "career_wickets": 0
+  },
+  {
+    "name": "SK Raina",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 5536,
+    "career_wickets": 0
+  },
+  {
+    "name": "MS Dhoni",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 5243,
+    "career_wickets": 0
+  },
+  {
+    "name": "AB de Villiers",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 5181,
+    "career_wickets": 0
+  },
+  {
+    "name": "CH Gayle",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4997,
+    "career_wickets": 0
+  },
+  {
+    "name": "RV Uthappa",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4954,
+    "career_wickets": 0
+  },
+  {
+    "name": "KD Karthik",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4843,
+    "career_wickets": 0
+  },
+  {
+    "name": "KL Rahul",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4669,
+    "career_wickets": 0
+  },
+  {
+    "name": "AM Rahane",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4638,
+    "career_wickets": 0
+  },
+  {
+    "name": "F du Plessis",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4563,
+    "career_wickets": 0
+  },
+  {
+    "name": "SV Samson",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4419,
+    "career_wickets": 0
+  },
+  {
+    "name": "AT Rayudu",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4348,
+    "career_wickets": 0
+  },
+  {
+    "name": "G Gambhir",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 4217,
+    "career_wickets": 0
+  },
+  {
+    "name": "SR Watson",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3880,
+    "career_wickets": 0
+  },
+  {
+    "name": "MK Pandey",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3856,
+    "career_wickets": 0
+  },
+  {
+    "name": "SA Yadav",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3594,
+    "career_wickets": 0
+  },
+  {
+    "name": "JC Buttler",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3583,
+    "career_wickets": 0
+  },
+  {
+    "name": "KA Pollard",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3437,
+    "career_wickets": 0
+  },
+  {
+    "name": "RR Pant",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3297,
+    "career_wickets": 0
+  },
+  {
+    "name": "YK Pathan",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3222,
+    "career_wickets": 0
+  },
+  {
+    "name": "Shubman Gill",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3216,
+    "career_wickets": 0
+  },
+  {
+    "name": "Q de Kock",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3154,
+    "career_wickets": 0
+  },
+  {
+    "name": "SS Iyer",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 3131,
+    "career_wickets": 0
+  },
+  {
+    "name": "RA Jadeja",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2959,
+    "career_wickets": 0
+  },
+  {
+    "name": "WP Saha",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2928,
+    "career_wickets": 0
+  },
+  {
+    "name": "DA Miller",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2924,
+    "career_wickets": 0
+  },
+  {
+    "name": "BB McCullum",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2876,
+    "career_wickets": 0
+  },
+  {
+    "name": "PA Patel",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2848,
+    "career_wickets": 0
+  },
+  {
+    "name": "Yuvraj Singh",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2754,
+    "career_wickets": 0
+  },
+  {
+    "name": "GJ Maxwell",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2730,
+    "career_wickets": 0
+  },
+  {
+    "name": "V Sehwag",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2728,
+    "career_wickets": 0
+  },
+  {
+    "name": "Ishan Kishan",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2644,
+    "career_wickets": 0
+  },
+  {
+    "name": "N Rana",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2636,
+    "career_wickets": 0
+  },
+  {
+    "name": "MA Agarwal",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2616,
+    "career_wickets": 0
+  },
+  {
+    "name": "M Vijay",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2607,
+    "career_wickets": 0
+  },
+  {
+    "name": "HH Pandya",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2534,
+    "career_wickets": 0
+  },
+  {
+    "name": "SPD Smith",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2495,
+    "career_wickets": 0
+  },
+  {
+    "name": "SE Marsh",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2489,
+    "career_wickets": 0
+  },
+  {
+    "name": "AD Russell",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average",
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 2428,
+    "career_wickets": 0
+  },
+  {
+    "name": "JH Kallis",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2427,
+    "career_wickets": 0
+  },
+  {
+    "name": "RD Gaikwad",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2380,
+    "career_wickets": 0
+  },
+  {
+    "name": "DR Smith",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2363,
+    "career_wickets": 0
+  },
+  {
+    "name": "SR Tendulkar",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2334,
+    "career_wickets": 0
+  },
+  {
+    "name": "RA Tripathi",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2236,
+    "career_wickets": 0
+  },
+  {
+    "name": "R Dravid",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2174,
+    "career_wickets": 0
+  },
+  {
+    "name": "KS Williamson",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2074,
+    "career_wickets": 0
+  },
+  {
+    "name": "AJ Finch",
+    "metrics": [
+      "runs",
+      "strike_rate",
+      "average"
+    ],
+    "career_runs": 2071,
+    "career_wickets": 0
+  },
+  {
+    "name": "AR Patel",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 1653,
+    "career_wickets": 0
+  },
+  {
+    "name": "AK Markram",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 995,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Symonds",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 974,
+    "career_wickets": 0
+  },
+  {
+    "name": "AD Mathews",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 676,
+    "career_wickets": 0
+  },
+  {
+    "name": "AM Nayar",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 672,
+    "career_wickets": 0
+  },
+  {
+    "name": "AL Menaria",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 400,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Mishra",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 282,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Ashish Reddy",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 198,
+    "career_wickets": 0
+  },
+  {
+    "name": "AA Jhunjhunwala",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 183,
+    "career_wickets": 0
+  },
+  {
+    "name": "AC Voges",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 181,
+    "career_wickets": 0
+  },
+  {
+    "name": "AB Agarkar",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 120,
+    "career_wickets": 0
+  },
+  {
+    "name": "AB McDonald",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 112,
+    "career_wickets": 0
+  },
+  {
+    "name": "MA Starc",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 85,
+    "career_wickets": 1
+  },
+  {
+    "name": "A Flintoff",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 62,
+    "career_wickets": 0
+  },
+  {
+    "name": "AD Mascarenhas",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 39,
+    "career_wickets": 0
+  },
+  {
+    "name": "AJ Tye",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 32,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Chandila",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Choudhary",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Kamboj",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Kumble",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Mithun",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Nehra",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Nortje",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Singh",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Uniyal",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "A Zampa",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AA Chavan",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AB Dinda",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AC Thomas",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AF Milne",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AG Murtaza",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AM Salvi",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AN Ahmed",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AP Dole",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AS Joseph",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AS Rajpoot",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AS Roy",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AU Rashid",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  },
+  {
+    "name": "AUK Pathan",
+    "metrics": [
+      "wickets",
+      "economy",
+      "bowling_avg"
+    ],
+    "career_runs": 0,
+    "career_wickets": 0
+  }
+]
