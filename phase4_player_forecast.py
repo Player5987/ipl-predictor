@@ -1,23 +1,3 @@
-"""
-============================================================
-IPL PREDICTOR — PHASE 4: PLAYER PERFORMANCE FORECASTING
-============================================================
-Uses:
-  data/processed/batting_career.csv
-  data/processed/bowling_career.csv
-  data/raw/bbb/deliveries_updated_mens_ipl_upto_2024.csv
-  data/raw/2025/ipl_batsman.csv
-  data/raw/2025/ipl_bowler.csv
-
-Outputs:
-  models/batting_model_{player}.pkl (per-player LSTM)
-  models/player_stats.json (aggregated career stats)
-  models/player_forecast.json (next-season predictions)
-
-HOW TO RUN:
-  python phase4_player_forecast.py
-============================================================
-"""
 
 import pandas as pd
 import numpy as np
@@ -42,9 +22,6 @@ def parse_season(s):
     try:    return int(float(s))
     except: return None
 
-# ============================================================
-# STEP 1 — LOAD CAREER STATS
-# ============================================================
 print("\n[STEP 1] Loading player career stats ...")
 
 # Try multiple sources for batting stats
@@ -70,9 +47,7 @@ for path in [
         print(f"  Cols   : {bowling.columns.tolist()}")
         break
 
-# ============================================================
-# STEP 2 — BUILD FROM DELIVERIES IF CAREER FILES MISSING
-# ============================================================
+
 print("\n[STEP 2] Building career stats from deliveries ...")
 
 DELIV = os.path.join(RAW,"bbb",
