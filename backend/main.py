@@ -1,8 +1,4 @@
 
-"""
-IPL Predictor - FastAPI Backend
-Run: uvicorn backend.main:app --reload --port 8000
-"""
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -51,7 +47,7 @@ async def lifespan(app: FastAPI):
             except Exception as e:
                 print(f"  {fn} failed: {e}")
 
-    # Load ELO ratings
+    
     p = os.path.join(MDIR, "final_elo.json")
     if os.path.exists(p):
         with open(p, encoding="utf-8") as f:
@@ -60,7 +56,7 @@ async def lifespan(app: FastAPI):
     else:
         store["elo"] = {}
 
-    # Load player forecasts
+    
     for fname, key in [
         ("player_forecast.json", "player_forecast"),
         ("player_stats.json",    "player_stats"),
@@ -94,7 +90,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── IPL TEAMS ────────────────────────────────────────────
+
 TEAMS = [
     "Chennai Super Kings",
     "Mumbai Indians",
@@ -123,10 +119,8 @@ def build_features(team1, team2, year):
     elo2 = get_elo(team2, year)
     elo_wr = elo_win_prob(team1, team2, year)
 
-    # Phase features use league averages as neutral default
-    # when no specific team data available
     mapping = {
-        # Phase features (new — from ball-by-ball data)
+        
         "pp_dot_diff":          0.0,
         "death_wicket_diff":    0.0,
         "pp_wicket_rate_diff":  0.0,
@@ -164,9 +158,6 @@ def predict_prob(team1, team2, year):
         return round(elo_p, 3), f"elo_fallback({e})"
 
 
-# ============================================================
-# ENDPOINTS
-# ============================================================
 
 @app.get("/")
 async def root():
@@ -181,7 +172,6 @@ async def root():
                       "/elo/rankings"]
     }
 
-# ── GET /teams ────────────────────────────────────────────
 @app.get("/teams")
 async def list_teams():
     teams = []
