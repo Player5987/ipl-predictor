@@ -9,6 +9,16 @@ frontend/public/
 data/
 2025/
 
+# Allow model files specifically
+!models/final_elo.json
+!models/player_forecast.json
+!models/player_stats.json
+!models/players_list.json
+!models/phase_features.json
+!models/feature_names.json
+!models/results.json
+!models/feat_correlations.json
+
 
 venv/
 __pycache__/
