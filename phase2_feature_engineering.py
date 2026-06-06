@@ -1,16 +1,4 @@
-"""
-============================================================
-IPL MATCH WINNER PREDICTOR
-Phase 2: Complete Feature Engineering Pipeline
-============================================================
-HOW TO RUN:
-  1. Place this file inside your project root (ipl-predictor/)
-  2. Make sure your data/processed/ has matches_all.csv
-     OR data/raw/ has matches.csv
-  3. Run: python phase2_feature_engineering.py
-  4. Output: data/processed/features.csv
-============================================================
-"""
+
 
 import pandas as pd
 import numpy as np
@@ -18,10 +6,7 @@ import os
 import warnings
 warnings.filterwarnings("ignore")
 
-# ============================================================
-# STEP 0 — SETUP: PATHS AND LOADING
-# ============================================================
-# Adjust BASE to wherever you placed this script
+
 BASE = os.path.dirname(os.path.abspath(__file__))
 RAW  = os.path.join(BASE, "data", "raw")
 PROC = os.path.join(BASE, "data", "processed")
@@ -32,8 +17,7 @@ print("  IPL PREDICTOR — PHASE 2: FEATURE ENGINEERING")
 print("=" * 60)
 print()
 
-# ---------- LOAD MATCHES ----------
-# Tries combined file first, falls back to raw
+
 combined_path = os.path.join(PROC, "matches_all.csv")
 raw_path      = os.path.join(RAW,  "matches.csv")
 
@@ -54,8 +38,7 @@ print(f"       Rows loaded  : {len(df)}")
 print(f"       Columns found: {df.columns.tolist()}")
 print()
 
-# ---------- FIX DATE COLUMN ----------
-# Different datasets use different column names for the date
+
 date_candidates = ["date", "match_date", "Date", "start_date"]
 date_col = next((c for c in date_candidates if c in df.columns), None)
 if date_col is None:
@@ -66,8 +49,7 @@ if date_col != "date":
 df["date"] = pd.to_datetime(df["date"], dayfirst=True, format='mixed')
 df = df.sort_values("date").reset_index(drop=True)
 
-# ---------- FIX COLUMN NAMES ----------
-# Handle different column naming across datasets
+
 col_map = {
     "team_1":         "team1",
     "team_2":         "team2",
@@ -95,9 +77,7 @@ print(f"[INFO] Seasons    : {sorted(df['date'].dt.year.unique().tolist())}")
 print()
 
 
-# ============================================================
-# STEP 1 — CLEAN: STANDARDISE TEAM NAMES
-# ============================================================
+
 print("[STEP 1] Standardising team names ...")
 
 TEAM_MAP = {
@@ -122,23 +102,8 @@ print(f"         Teams: {sorted(df['team1'].unique())}")
 print()
 
 
-# ============================================================
-# STEP 2 — ELO RATING SYSTEM
-# ============================================================
-"""
-CONCEPT: ELO tracks team strength dynamically.
-Formula : new_rating = old_rating + K * (actual - expected)
-          expected   = 1 / (1 + 10^((opponent_elo - your_elo)/400))
-K = 32 means each match can change rating by at most 32 points.
 
-WHY ELO over win%?
-  Win% treats beating a last-place team the same as
-  beating the champion. ELO self-corrects — beating a
-  strong team earns more points than beating a weak one.
 
-LEAKAGE RULE: We record ELO BEFORE updating it.
-  The model only ever sees ratings computed from PAST matches.
-"""
 print("[STEP 2] Computing ELO ratings ...")
 
 def compute_elo(df, k=32, base=1500):
@@ -186,22 +151,7 @@ df, final_elo = compute_elo(df)
 print()
 
 
-# ============================================================
-# STEP 3 — HEAD-TO-HEAD WIN RATE
-# ============================================================
-"""
-CONCEPT: For any match between Team A and Team B,
-  h2h_winrate_t1 = (Team1 wins against Team2) /
-                   (total matches between them)
-  
-  Uses ONLY matches before the current match index.
-  Returns 0.5 when no history exists (neutral prior).
 
-WHY THIS MATTERS:
-  Some teams dominate others consistently regardless of
-  overall form. CSK vs RCB h2h is very different from
-  CSK vs MI h2h. This feature captures that.
-"""
 print("[STEP 3] Computing head-to-head win rates ...")
 
 h2h_wr_list = []
@@ -236,22 +186,7 @@ print(f"         Games with H2H history: "
 print()
 
 
-# ============================================================
-# STEP 4 — ROLLING FORM (last 5 matches)
-# ============================================================
-"""
-CONCEPT: For each team, compute their win rate over the
-  last 5 matches BEFORE the current match.
 
-  form_t1 = wins in last 5 / 5
-  streak_t1 = 1 if team won last 3 in a row, else 0
-  form_diff = form_t1 - form_t2 (which team is hotter)
-
-WHY WINDOW=5?
-  Too small (2 matches) → very noisy
-  Too large (20 matches) → misses recent slumps
-  5 matches ≈ 10 days of IPL — captures current momentum
-"""
 print("[STEP 4] Computing rolling form (last 5 matches) ...")
 
 def get_form(df, team, before_pos, window=5):
@@ -295,21 +230,7 @@ print(f"         Streak events: "
 print()
 
 
-# ============================================================
-# STEP 5 — VENUE WIN RATE PER TEAM
-# ============================================================
-"""
-CONCEPT: Each team has a win rate at each specific venue
-  computed from all PRIOR matches at that venue.
 
-  venue_wr_t1 = team1 wins at this venue / 
-                team1 matches at this venue (before today)
-
-WHY VENUE MATTERS:
-  MI at Wankhede wins ~62% vs their overall ~55%.
-  Venue captures: pitch type, crowd support,
-  familiarity with conditions, altitude/climate.
-"""
 print("[STEP 5] Computing venue win rates ...")
 
 venue_t1, venue_t2 = [], []
@@ -343,21 +264,7 @@ print(f"         Avg venue_wr_t1 : {np.mean(venue_t1):.3f}")
 print()
 
 
-# ============================================================
-# STEP 6 — TOSS FEATURES
-# ============================================================
-"""
-CONCEPT: Three toss-related signals:
-  toss_t1      = 1 if team1 won the toss
-  bat_first    = 1 if toss winner chose to bat
-  field_adv_t1 = 1 if team1 won toss AND chose to field
-                 (fielding first is +EV in T20 dew conditions)
 
-RESEARCH FINDING:
-  Toss winner wins only ~53% of the time — barely above
-  random. But the interaction (won toss + chose to field)
-  is stronger, especially at certain venues.
-"""
 print("[STEP 6] Adding toss features ...")
 
 toss_t1_col    = []
@@ -388,9 +295,8 @@ print(f"         Toss won by team1: "
 print()
 
 
-# ============================================================
-# STEP 7 — CONTEXT FEATURES
-# ============================================================
+
+
 print("[STEP 7] Adding context features ...")
 
 df["season_num"] = df["date"].dt.year - 2007
@@ -418,19 +324,8 @@ print(f"         Playoff matches: {df['is_playoff'].sum()}")
 print()
 
 
-# ============================================================
-# STEP 8 — TARGET COLUMN + FINAL ASSEMBLY
-# ============================================================
-"""
-TARGET:
-  target = 1 → team1 won this match
-  target = 0 → team2 won this match
 
-During prediction for future matches:
-  You pass team1 and team2 in alphabetical order,
-  and the model returns P(team1 wins). If you want
-  P(teamA wins), just make sure teamA = team1.
-"""
+
 print("[STEP 8] Assembling final feature matrix ...")
 
 df["target"] = (df["winner"] == df["team1"]).astype(int)
@@ -516,13 +411,10 @@ print(f"  Target    : {output['target'].mean():.1%} "
 print()
 
 
-# ============================================================
-# EDA: FEATURE CORRELATION REPORT
-# ============================================================
+
 print("FEATURE ANALYSIS")
 print("-" * 50)
 
-# Correlation with target (how predictive each feature is)
 corr = output[FEATURE_COLS + ["target"]]\
        .corr()["target"].drop("target")\
        .sort_values(key=abs, ascending=False)
