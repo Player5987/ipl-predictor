@@ -1,27 +1,4 @@
-"""
-============================================================
-IPL PREDICTOR — PROPER FIX V3
-============================================================
-ROOT CAUSE IDENTIFIED:
-  Your matches_all.csv has 1161 matches spanning 2008-2031
-  (including future/simulated matches beyond 2025).
-  The test set (2023+) contains matches that don't have
-  real historical context — predictions are impossible.
 
-  Also: features like ELO diff, H2H are too weak alone.
-  We need to add PLAYER SQUAD STRENGTH features from
-  your batting_career.csv and bowling_career.csv.
-
-THIS SCRIPT:
-  1. Filters to only real IPL matches (2008-2024)
-  2. Adds squad strength features from player stats
-  3. Uses proper cross-validation instead of holdout
-  4. Trains a well-calibrated final model
-
-HOW TO RUN:
-  python proper_fix_v3.py
-============================================================
-"""
 
 import pandas as pd
 import numpy as np
@@ -51,9 +28,7 @@ print("=" * 62)
 print("  IPL PREDICTOR — PROPER FIX V3")
 print("=" * 62)
 
-# ============================================================
-# STEP 1 — LOAD ALL DATA FILES
-# ============================================================
+
 print("\n[STEP 1] Loading all data files ...")
 
 def try_load(paths, label):
@@ -92,9 +67,7 @@ if matches is None:
     raise FileNotFoundError("matches CSV not found!")
 
 
-# ============================================================
-# STEP 2 — CLEAN MATCHES, FILTER REAL SEASONS ONLY
-# ============================================================
+
 print("\n[STEP 2] Cleaning and filtering matches ...")
 
 # Auto-detect columns
@@ -127,9 +100,7 @@ matches = matches[matches["winner"].notna()].copy()
 matches = matches[~matches["winner"].isin(
     ["","No result","Tied","NR","no result"])].copy()
 
-# CRITICAL: Keep only REAL seasons 2008-2024
-# Your dataset has future years (2026-2031) which are
-# simulated/predicted and corrupt the model
+
 matches["year"] = matches["date"].dt.year
 print(f"\n  Matches per year:")
 print(matches["year"].value_counts().sort_index().to_string())
@@ -222,9 +193,7 @@ else:
           "skipping")
 
 
-# ============================================================
-# STEP 4 — FEATURE ENGINEERING
-# ============================================================
+
 print("\n[STEP 4] Feature engineering ...")
 
 # ── ELO ──
@@ -429,10 +398,6 @@ matches[FEATURE_COLS] = matches[FEATURE_COLS].fillna(0.5)
 print(f"\n  Features: {len(FEATURE_COLS)}")
 print(f"  {FEATURE_COLS}")
 
-
-# ============================================================
-# STEP 6 — CREATE MIRROR DATA (symmetric training)
-# ============================================================
 print("\n[STEP 6] Creating symmetric training data ...")
 
 df_orig = matches.copy()
@@ -492,16 +457,14 @@ with open(os.path.join(PROC,"feature_cols.json"),"w") as f:
 print(f"  Saved features.csv")
 
 
-# ============================================================
-# STEP 7 — TRAIN/TEST SPLIT
-# ============================================================
+
 print("\n[STEP 7] Train/test split ...")
 
 SPLIT = pd.Timestamp("2022-01-01")
 
-# Train: full data (real+mirror) before split
+
 train_df = df_full[df_full["date"] < SPLIT]
-# Test: REAL matches only after split (no mirrors in test)
+
 test_df  = df_orig[df_orig["date"] >= SPLIT].copy()
 
 X_train = train_df[FEATURE_COLS]
@@ -530,9 +493,7 @@ joblib.dump(FEATURE_COLS,
 tscv = TimeSeriesSplit(n_splits=5)
 
 
-# ============================================================
-# STEP 8 — TRAIN MODELS
-# ============================================================
+
 print("\n[STEP 8] Training models ...")
 
 xgb_m = XGBClassifier(
